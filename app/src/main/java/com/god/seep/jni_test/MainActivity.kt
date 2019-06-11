@@ -1,6 +1,7 @@
 package com.god.seep.jni_test
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
         sample_text.text = stringFromJNI("test -- ")
         Log.e("tag", "uid -- ${Unix.getuid()}")
+        settings.setOnClickListener { startActivity(Intent(this, ThreadActivity::class.java)) }
     }
 
     fun testA(): String {

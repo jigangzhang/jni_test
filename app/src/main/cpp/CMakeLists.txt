@@ -28,6 +28,7 @@ add_library( # Sets the name of the library. 生成的so名称，在java代码�
         # Provides a relative path to your source file(s).
         # 为源文件提供一个相对路径,可以使用通配符，也可以一个一个文件的引入
         native-lib.cpp
+        native-thread.cpp
         Unix_wrap.cxx)
 
 # Searches for a specified prebuilt library and stores the path as a

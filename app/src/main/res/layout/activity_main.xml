@@ -16,5 +16,13 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+    <Button
+            app:layout_constraintTop_toBottomOf="@+id/sample_text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/settings"
+            android:layout_width="wrap_content"
+            android:text="@string/menu_settings"
+            android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
