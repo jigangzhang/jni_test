@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.god.seep.jni_test.socket.EchoClientActivity
+import com.god.seep.jni_test.socket.EchoServerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         sample_text.text = stringFromJNI("test -- ")
         Log.e("tag", "uid -- ${Unix.getuid()}")
         settings.setOnClickListener { startActivity(Intent(this, ThreadActivity::class.java)) }
+        echo.setOnClickListener { startActivity(Intent(this, EchoServerActivity::class.java)) }
+        client.setOnClickListener { startActivity(Intent(this, EchoClientActivity::class.java)) }
     }
 
     fun testA(): String {

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".socket.EchoServerActivity">
+
+    <EditText
+            android:id="@+id/port_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/port_edit"
+            android:inputType="number"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/start_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_weight="1">
+        <requestFocus/>
+    </EditText>
+
+    <Button
+            android:id="@+id/start_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/start_server_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/port_edit"
+            app:layout_constraintHorizontal_weight="1"/>
+
+    <androidx.core.widget.NestedScrollView
+            android:id="@+id/log_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start_button"
+            app:layout_constraintVertical_weight="1">
+
+        <TextView
+                android:id="@+id/log_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
