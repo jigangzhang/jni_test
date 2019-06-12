@@ -54,3 +54,39 @@ Java_com_god_seep_jni_1test_socket_EchoClientActivity_nativeStartTcpClient(JNIEn
     if (clientSocket > -1)
         close(clientSocket);
 }
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_god_seep_jni_1test_socket_EchoClientActivity_nativeStartUdpClient(JNIEnv *env, jobject obj, jstring ip,
+                                                                           jint port, jstring msg) {
+    int clientSocket = NewUdpSocket(env, obj);
+    if (NULL == env->ExceptionOccurred()) {
+        struct sockaddr_in address;
+        memset(&address, 0, sizeof(address));
+        address.sin_family = PF_INET;
+        const char *ipAddress = env->GetStringUTFChars(ip, NULL);
+        if (NULL == ipAddress)
+            goto exit;
+        int result = inet_aton(ipAddress, &address.sin_addr);
+        env->ReleaseStringUTFChars(ip, ipAddress);
+        if (0 == result) {
+            ThrowErrnoException(env, "java/io/IOException", errno);
+            goto exit;
+        }
+        address.sin_port = htons(port);
+        const char *msgText = env->GetStringUTFChars(msg, NULL);
+        if (NULL == msgText)
+            goto exit;
+        jsize msgSize = env->GetStringUTFLength(msg);
+        SendDatagramToSocket(env, obj, clientSocket, &address, msgText, msgSize);
+        env->ReleaseStringUTFChars(msg, msgText);
+        if (NULL != env->ExceptionOccurred())
+            goto exit;
+        char buffer[MAX_BUFFER_SIZE];
+        //清除地址
+        memset(&address, 0, sizeof(address));
+        ReceiveDatagramFromSocket(env, obj, clientSocket, &address, buffer, MAX_BUFFER_SIZE);
+    }
+    exit:
+    if (clientSocket > 0)
+        close(clientSocket);
+}

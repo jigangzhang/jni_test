@@ -82,12 +82,21 @@ static void ThrowErrnoException(JNIEnv *env, const char *clazzName, int errnum) 
 
 static int NewTcpSocket(JNIEnv *env, jobject obj) {
     LogMessage(env, obj, "Constructing a new TCP socket...");
-    //构造Socket
+    //构造Socket, 流
     int tcpSocket = socket(PF_INET, SOCK_STREAM | SOCK_CLOEXEC, 0);
     LOG_INFO("tcp socket: %i", tcpSocket);
     if (-1 == tcpSocket)
         ThrowErrnoException(env, "java/io/IOException", errno);
     return tcpSocket;
+}
+
+static int NewUdpSocket(JNIEnv *env, jobject obj) {
+    LogMessage(env, obj, "Constructing a new UDP socket...");
+    int udpSocket = socket(PF_INET, SOCK_DGRAM | SOCK_CLOEXEC, 0);//数据报
+    LOG_INFO("udp socket: %i", udpSocket);
+    if (-1 == udpSocket)
+        ThrowErrnoException(env, "java/io/IOException", errno);
+    return udpSocket;
 }
 
 /**
@@ -204,6 +213,29 @@ static ssize_t ReceiveFromSocket(JNIEnv *env, jobject obj, int sd, char *buffer,
 }
 
 /**
+ *接收UDP 数据报
+ */
+static ssize_t ReceiveDatagramFromSocket(JNIEnv *env, jobject obj, int sd, struct sockaddr_in *address,
+                                         char *buffer, size_t bufferSize) {
+    socklen_t addressLength = sizeof(struct sockaddr_in);
+    LogMessage(env, obj, "Receiving from the socket...");
+    //从socket 中接收数据报
+    ssize_t recvSize = recvfrom(sd, buffer, bufferSize, 0, (struct sockaddr *) address, &addressLength);
+    //-1 接收失败
+    if (-1 == recvSize) {
+        ThrowErrnoException(env, "java/io/IOException", errno);
+    } else {
+        LogAddress(env, obj, "Received from", address);
+        buffer[recvSize] = NULL;
+        if (recvSize > 0) {
+            LogMessage(env, obj, "Received %d bytes: %s", recvSize, buffer);
+        }
+        //返回 0 连接失败
+    }
+    return recvSize;
+}
+
+/**
  * 将数据缓冲区发送到 socket
  *向socket 发送数据：send（阻塞函数）
  */
@@ -222,5 +254,22 @@ static ssize_t SendToSocket(JNIEnv *env, jobject obj, int sd, const char *buffer
             LogMessage(env, obj, "Client disconnected.");
         }
     }
+    return sentSize;
+}
+
+/**
+ *向UDP 发送数据报
+ */
+static ssize_t SendDatagramToSocket(JNIEnv *env, jobject obj, int sd, const struct sockaddr_in *address,
+                                    const char *buffer, size_t bufferSize) {
+    LogAddress(env, obj, "Sending to", address);
+    ssize_t sentSize = sendto(sd, buffer, bufferSize, 0, (const sockaddr *) address, sizeof(struct sockaddr_in));
+    //-1 发送失败
+    if (-1 == sentSize)
+        ThrowErrnoException(env, "java/io/IOException", errno);
+    else if (sentSize > 0) {
+        LogMessage(env, obj, "Sent %d bytes: %s", sentSize, buffer);
+    }
+    //返回0 连接失败
     return sentSize;
 }

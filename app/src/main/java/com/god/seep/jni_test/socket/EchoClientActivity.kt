@@ -26,10 +26,13 @@ class EchoClientActivity : BaseEchoActivity() {
 
     private external fun nativeStartTcpClient(ip: String, port: Int, msg: String)
 
+    private external fun nativeStartUdpClient(ip: String, port: Int, msg: String)
+
     private inner class ClientTask(val ip: String, val port: Int, val msg: String) : AbsEchoTask() {
         override fun onBackground() {
             logMessage("Starting client.")
-            nativeStartTcpClient(ip, port, msg)
+//            nativeStartTcpClient(ip, port, msg)
+            nativeStartUdpClient(ip, port, msg)
             logMessage("Client terminated.")
         }
     }

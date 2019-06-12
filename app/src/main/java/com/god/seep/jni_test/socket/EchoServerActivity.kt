@@ -29,7 +29,8 @@ class EchoServerActivity : BaseEchoActivity() {
     private inner class ServerTask(val port: Int) : AbsEchoTask() {
         override fun onBackground() {
             logMessage("Starting server.")
-            nativeStartTcpServer(port)
+//            nativeStartTcpServer(port)
+            nativeStartUdpServer(port)
             logMessage("Server terminated.")
         }
     }
