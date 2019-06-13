@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.god.seep.jni_test.socket.EchoClientActivity
+import com.god.seep.jni_test.socket.EchoLocalActivity
 import com.god.seep.jni_test.socket.EchoServerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,14 +22,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val code = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-        if (code == PackageManager.PERMISSION_DENIED)
-            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 100)
+        val wCode = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (code == PackageManager.PERMISSION_DENIED || wCode == PackageManager.PERMISSION_DENIED)
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ), 100
+            )
         // Example of a call to a native method
         sample_text.text = stringFromJNI("test -- ")
         Log.e("tag", "uid -- ${Unix.getuid()}")
         settings.setOnClickListener { startActivity(Intent(this, ThreadActivity::class.java)) }
         echo.setOnClickListener { startActivity(Intent(this, EchoServerActivity::class.java)) }
         client.setOnClickListener { startActivity(Intent(this, EchoClientActivity::class.java)) }
+        local.setOnClickListener { startActivity(Intent(this, EchoLocalActivity::class.java)) }
     }
 
     fun testA(): String {

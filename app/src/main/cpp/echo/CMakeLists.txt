@@ -5,7 +5,8 @@ add_library(
         SHARED
         echo.cpp
         native-socket.cpp
-        native-client.cpp)
+        native-client.cpp
+        native-local.cpp)
 
 find_library(
         log-lib
