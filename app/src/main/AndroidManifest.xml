@@ -13,6 +13,10 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".media.BitmapPlayerActivity" android:label="@string/bitmap_player_title">
+        </activity>
+        <activity android:name=".media.MediaAviActivity">
+        </activity>
         <activity android:name=".socket.EchoLocalActivity">
         </activity>
         <activity android:name=".socket.EchoClientActivity">

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.god.seep.jni_test.media.MediaAviActivity
 import com.god.seep.jni_test.socket.EchoClientActivity
 import com.god.seep.jni_test.socket.EchoLocalActivity
 import com.god.seep.jni_test.socket.EchoServerActivity
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         echo.setOnClickListener { startActivity(Intent(this, EchoServerActivity::class.java)) }
         client.setOnClickListener { startActivity(Intent(this, EchoClientActivity::class.java)) }
         local.setOnClickListener { startActivity(Intent(this, EchoLocalActivity::class.java)) }
+        media_avi.setOnClickListener { startActivity(Intent(this, MediaAviActivity::class.java)) }
     }
 
     fun testA(): String {

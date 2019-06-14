@@ -63,4 +63,4 @@ target_link_libraries( # Specifies the target library.  指定目标library
 
 #添加子目录,将会调用子目录中的CMakeLists.txt, 生成多个 so库
 ADD_SUBDIRECTORY(echo)
-#ADD_SUBDIRECTORY(two)
+ADD_SUBDIRECTORY(meida)

@@ -5,6 +5,7 @@
     <string name="menu_echo">Echo</string>
     <string name="menu_client">Client</string>
     <string name="menu_local">Local</string>
+    <string name="menu_media_avi">Media AVI</string>
     <string name="title">Threads</string>
     <string name="threads_edit">Thread Count</string>
     <string name="iterations_edit">Iteration Count</string>
@@ -20,4 +21,12 @@
     <string name="message_edit">Message</string>
     <string name="title_local_echo">Local Echo</string>
     <string name="local_port_edit">Port Name</string>
+
+    <string name="media_avi_title">Media Avi</string>
+    <string name="file_name_hint">AVI Video File Name</string>
+    <string name="file_name_text">galleon.avi</string>
+    <string name="play_button">Play</string>
+    <string name="error_alert_title">Error Occurred</string>
+    <string name="bitmap_player_radio">Bitmap Player</string>
+    <string name="bitmap_player_title">Bitmap Player</string>
 </resources>
