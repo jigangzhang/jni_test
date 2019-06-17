@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DGL_GLEXT_PROTOTYPES")
+
 add_library(
         media-lib
         SHARED
@@ -22,8 +24,18 @@ find_library(
         bitmap-lib
         jnigraphics)
 
+find_library(
+        opengl-lib
+        GLESv1_CM)
+
+find_library(
+        android-lib
+        android)
+
 target_link_libraries(
         media-lib
         avi-lib
         ${log-lib}
-        ${bitmap-lib})
+        ${bitmap-lib}
+        ${opengl-lib}
+        ${android-lib})

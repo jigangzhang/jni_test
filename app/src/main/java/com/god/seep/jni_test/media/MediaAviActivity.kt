@@ -23,6 +23,12 @@ class MediaAviActivity : AppCompatActivity() {
             R.id.bitmap_player_radio -> {
                 intent.setClass(this, BitmapPlayerActivity::class.java)
             }
+            R.id.open_gl_player_radio -> {
+                intent.setClass(this, OpenGLPlayerActivity::class.java)
+            }
+            R.id.native_window_player_radio -> {
+                intent.setClass(this, NativeWindowActivity::class.java)
+            }
         }
         val file = File(Environment.getExternalStorageDirectory(), file_name_edit.text.toString())
         intent.putExtra(BasePlayerActivity.EXTRA_FILE_NAME, file.absolutePath)

@@ -13,7 +13,17 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".media.BitmapPlayerActivity" android:label="@string/bitmap_player_title">
+        <activity
+                android:name=".media.NativeWindowActivity"
+                android:label="@string/window_player_title">
+        </activity>
+        <activity
+                android:name=".media.OpenGLPlayerActivity"
+                android:label="@string/opengl_player_title">
+        </activity>
+        <activity
+                android:name=".media.BitmapPlayerActivity"
+                android:label="@string/bitmap_player_title">
         </activity>
         <activity android:name=".media.MediaAviActivity">
         </activity>

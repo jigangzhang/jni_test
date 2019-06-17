@@ -2,6 +2,7 @@ package com.god.seep.jni_test.media
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.SurfaceHolder
 import com.god.seep.jni_test.R
 import kotlinx.android.synthetic.main.activity_bitmap_player.*
@@ -36,6 +37,7 @@ class BitmapPlayerActivity : BasePlayerActivity() {
     val renderer = Runnable {
         //创建一个新的 bitmap 来保存所有帧
         val bitmap = Bitmap.createBitmap(getWidth(avi), getHeight(avi), Bitmap.Config.RGB_565)
+        Log.e("tag", "bitmap width --${getWidth(avi)}, height --${getHeight(avi)}")
         //使用帧速来计算延迟
         var frameDelay = (1000 / getFrameRate(avi)).toLong()
         while (isPlaying.get()) {

@@ -29,4 +29,8 @@
     <string name="error_alert_title">Error Occurred</string>
     <string name="bitmap_player_radio">Bitmap Player</string>
     <string name="bitmap_player_title">Bitmap Player</string>
+    <string name="opengl_player_title">OpenGL Player</string>
+    <string name="opengl_player_radio">OpenGL Player</string>
+    <string name="window_player_title">Native Window Player</string>
+    <string name="window_player_radio">Native Window Player</string>
 </resources>
