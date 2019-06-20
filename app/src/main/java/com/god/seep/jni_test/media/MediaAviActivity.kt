@@ -1,12 +1,16 @@
 package com.god.seep.jni_test.media
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import com.god.seep.jni_test.R
 import kotlinx.android.synthetic.main.activity_media_avi.*
 import java.io.File
+import java.io.IOException
+import java.lang.Exception
 
 class MediaAviActivity : AppCompatActivity() {
 
@@ -14,6 +18,10 @@ class MediaAviActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_media_avi)
         play_button.setOnClickListener { onPlayButtonClick() }
+        wav_button.setOnClickListener {
+            val file = File(Environment.getExternalStorageDirectory(), wav_name_edit.text.toString())
+            PlayTask().execute(file.absolutePath)
+        }
     }
 
     private fun onPlayButtonClick() {
@@ -33,5 +41,26 @@ class MediaAviActivity : AppCompatActivity() {
         val file = File(Environment.getExternalStorageDirectory(), file_name_edit.text.toString())
         intent.putExtra(BasePlayerActivity.EXTRA_FILE_NAME, file.absolutePath)
         startActivity(intent)
+    }
+
+    companion object {
+        @JvmStatic
+        external fun play(fileName: String)
+
+        init {
+            System.loadLibrary("media-lib")
+        }
+    }
+}
+
+private class PlayTask : AsyncTask<String, Void, Exception>() {
+    override fun doInBackground(vararg params: String): Exception? {
+        var result: Exception? = null
+        try {
+            MediaAviActivity.play(params[0])
+        } catch (ex: IOException) {
+            result = ex
+        }
+        return result
     }
 }

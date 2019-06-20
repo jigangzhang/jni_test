@@ -24,11 +24,17 @@ class MainActivity : AppCompatActivity() {
 
         val code = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
         val wCode = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (code == PackageManager.PERMISSION_DENIED || wCode == PackageManager.PERMISSION_DENIED)
+        val aCode = checkSelfPermission(Manifest.permission.RECORD_AUDIO)
+        val mCode = checkSelfPermission(Manifest.permission.MODIFY_AUDIO_SETTINGS)
+        if (code == PackageManager.PERMISSION_DENIED || wCode == PackageManager.PERMISSION_DENIED
+            || aCode == PackageManager.PERMISSION_DENIED || mCode == PackageManager.PERMISSION_DENIED
+        )
             requestPermissions(
                 arrayOf(
                     Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.RECORD_AUDIO,
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS
                 ), 100
             )
         // Example of a call to a native method

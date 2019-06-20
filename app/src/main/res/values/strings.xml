@@ -24,7 +24,7 @@
 
     <string name="media_avi_title">Media Avi</string>
     <string name="file_name_hint">AVI Video File Name</string>
-    <string name="file_name_text">galleon.avi</string>
+    <string name="file_name_text">my.avi</string>
     <string name="play_button">Play</string>
     <string name="error_alert_title">Error Occurred</string>
     <string name="bitmap_player_radio">Bitmap Player</string>
@@ -33,4 +33,8 @@
     <string name="opengl_player_radio">OpenGL Player</string>
     <string name="window_player_title">Native Window Player</string>
     <string name="window_player_radio">Native Window Player</string>
+
+    <string name="media_wav_title">Media Wav</string>
+    <string name="wav_name_hint">WAV file</string>
+    <string name="wav_name">my.wav</string>
 </resources>
